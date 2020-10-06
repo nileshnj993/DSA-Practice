@@ -1,4 +1,4 @@
-#include <iostream>
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -318,9 +318,9 @@ int main(){
 	// explainPQ();
 	// explainSet(); // unordered set very useful - O(1) - no lower bound and upper bound applicable
 	// explainMultiSet();
-	// explainMap(); // maps don't store duplicate key-value pairs. Multimaps can store duplicate key-value pairs. mp[key] can't be used here. unordered_map can be used for faster insertion - it isn't sorted.
+	explainMap(); // maps don't store duplicate key-value pairs. Multimaps can store duplicate key-value pairs. mp[key] can't be used here. unordered_map can be used for faster insertion - it isn't sorted.
 	// use unordered_map or unordered_set if getting tle with set/map
 	// extra();
 	unordered_set<int> s = {1,2,5,32,23,1};
-	second_max(s);
+	// second_max(s);
 }
