@@ -1,2 +1,2 @@
-# STL-Demo
-Exploring STL Classes and Methods
+# DSA - Practice
+Exploring **Data Structures and Algorithms** and their various implementations, in C++
