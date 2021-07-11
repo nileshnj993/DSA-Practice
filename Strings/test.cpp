@@ -24,4 +24,6 @@ int main(){
     for(string str:v){
         cout<<str<<",";
     }
+
+    cout<<stoi("0000000000023");
 }
