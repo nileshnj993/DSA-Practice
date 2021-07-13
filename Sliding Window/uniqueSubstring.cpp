@@ -9,10 +9,10 @@ string uniqueSubstring(string s){
     int start=-1;
     unordered_map<char,int> m;
     while(j<s.size()){
-        if(m.count(s[j]) && m[s[j]]>=i){
+        if(m.count(s[j]) && m[s[j]]>=i){ // if present in map and present in current window
             i = m[s[j]] + 1; // move start of window to one after previous occurrence
             windowLength = j-i;
-        } // if present in map and present in current window
+        } 
         
         m[s[j]] = j; // updating last occurrence
         windowLength++;
