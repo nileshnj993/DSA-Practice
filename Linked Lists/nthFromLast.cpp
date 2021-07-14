@@ -14,23 +14,39 @@ class node{
 
 int fromLast(node *head, int n){
 
-     int count = 0;
-     node *temp = head;
-     while(temp!=NULL){
-         count++;
-         temp = temp->next;
-     }
     
-     if(n>count){
-         return -1;
-     }
-     int pos = count-n+1;
-     count = 0;
-     while(count<pos-1){
-         head = head->next;
-         count++;
-     }
-     return head->data;
+    //  SLOW SOLUTION
+    //  node *temp = head;
+    //  int count = 0;
+    //  while(temp!=NULL){
+    //      count++;
+    //      temp = temp->next;
+    //  }
+    
+    //  if(n>count){
+    //      return -1;
+    //  }
+    //  int pos = count-n+1;
+    //  count = 0;
+    //  while(count<pos-1){
+    //      head = head->next;
+    //      count++;
+    //  }
+    //  return head->data;
+
+    // FAST SOLUTION
+    node *i = head; // slow pointer
+    node *j = head; // fast pointer
+    int count = 0;
+    while(count<n){
+        count++;
+        j=j->next;
+    }
+    while(j!=NULL){
+        i=i->next;
+        j=j->next;
+    }
+    return i->data;
 }
 
 int main(){
