@@ -9,21 +9,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int minRungs(vector<int> &rungs, int dist){
-    int count = 0;
-    int pos = 0;
-    int k = 0;
-    while(pos!=rungs[rungs.size()-1]){
-        count+=(rungs[k]-pos)/dist;
-        if((rungs[k]-pos)%dist!=0){
-            count++;
+    int minRungs(vector<int> &rungs, int dist){
+        int count = 0;
+        int pos = 0;
+        int k = 0;
+        while(pos!=rungs[rungs.size()-1]){
+            count+=(rungs[k]-pos)/dist;
+            if((rungs[k]-pos)%dist!=0){
+                count++;
+            }
+            count--;
+            pos = rungs[k];
+            k++;
         }
-        count--;
-        pos = rungs[k];
-        k++;
+        return count;
     }
-    return count;
-}
 
 int main(){
     ios_base::sync_with_stdio(false);

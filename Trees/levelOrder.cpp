@@ -26,6 +26,50 @@ node *buildTree(){
     return n;
 }
 
+node *levelOrderBuild(){ // if input given in level order
+    int data;
+    cin>>data;
+    node *root = new node(data);
+    queue<node *> q;
+    q.push(root);
+
+    while(!q.empty()){
+        node *current = q.front();
+        q.pop();
+        int child1, child2;
+        cin>>child1>>child2;
+        if(child1!=-1){
+            current->left = new node(child1);
+            q.push(current->left);
+        }
+        if(child2!=-1){
+            current->right = new node(child2);
+            q.push(current->right);
+        }
+    }
+    return root;
+
+}
+
+vector <int> preorderIterative(node* root)
+{
+  vector<int> result;
+  stack<node *> nodes;
+  nodes.push(root);
+  while(!nodes.empty()){
+      node *temp = nodes.top();
+      nodes.pop();
+      if(temp->right){ // pushing right first coz we need left on top
+          nodes.push(temp->right);
+      }
+      if(temp->left){
+          nodes.push(temp->left);
+      }
+      result.push_back(temp->data);
+  }
+  return result;
+}
+
 void displayPreOrder(node *root){
     if(root==NULL){
         return;
@@ -66,8 +110,13 @@ void displayLevelOrder(node *root){
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    node *root = buildTree();
+    node *root = levelOrderBuild();
     displayPreOrder(root);
+    cout<<"\n";
+    vector<int> result = preorderIterative(root);
+    for(auto i : result){
+        cout<<i<<" ";
+    }
     cout<<"\n";
     displayLevelOrder(root);
 }
