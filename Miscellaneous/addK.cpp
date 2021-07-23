@@ -24,20 +24,8 @@
 using namespace std;
 
 long arrayManipulation(int n, vector<vector<int>> queries) {
-    vector<int> result(n,0);
-    long max = INT_MIN;
-    int val = 0;
-    int rows = queries.size();
-    for(int i=0;i<rows;i++){
-        int start = queries[i][0];
-        int end = queries[i][1];
-        val = queries[i][2];
-        result.insert(result.begin()+start,end-start,val);
-    }
-    long it = *max_element(result.begin(), result.end());
-    return it;
-    
-}
+    return 5;
+}   
 
 int main(){
     vector<int> v = {1,2,3,4,5};
