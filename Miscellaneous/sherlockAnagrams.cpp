@@ -1,3 +1,9 @@
+// Two strings are anagrams of each other if the letters of one string can be rearranged to form the other string. Given a string, find the number of pairs of substrings of the string that are anagrams of each other.
+
+// Example
+// s = "mom"
+// The list of all anagrammatic pairs is [m,m] and [mo,om], hence output is 2
+
 #include<bits/stdc++.h>
 using namespace std;
 
