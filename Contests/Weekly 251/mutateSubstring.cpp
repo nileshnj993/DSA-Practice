@@ -2,22 +2,21 @@
 using namespace std;
 
 string maximumNumber(string num, vector<int>& change) {
-    string result = "";
    
-    bool changed = false;
+    bool changed = false; // if mutated yet or not
 
     
     for(int i=0;i<num.size();i++){
-        int curr = num[i] - '0';
-        int mutation = change[num[i]-'0'];
-        if(mutation>curr){
-            num[i] = mutation+'0';
-            changed = true;
+        int curr = num[i] - '0'; // actual value
+        int mutation = change[num[i]-'0']; // possible mutated value
+        if(mutation>curr){ // if mutation greater
+            num[i] = mutation+'0'; // mutate
+            changed = true; // mark that mutation done to find substrings
         }
-        else if(mutation>=curr &&changed==true){
-            num[i] = mutation+'0';
+        else if(mutation>=curr &&changed==true){ // if mutation possible and earlier mutations already done (basically substring with length>1)
+            num[i] = mutation+'0'; // mutate
         }
-        else if(mutation<curr && changed==true){
+        else if(mutation<curr && changed==true){ // any time a break is located after changes have been made, break and return num
             return num;
         }
         
