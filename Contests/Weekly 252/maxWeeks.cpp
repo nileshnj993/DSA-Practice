@@ -27,37 +27,18 @@ bool descending(int num1, int num2){
 }
 
 long long numberOfWeeks(vector<int>& milestones) {
-   long long numWeeks = 0;
-   sort(milestones.begin(), milestones.end(), descending);
-   int numZeros = 0;
-   int i = 0;
-   
-    vector<int> pos = {0,1};
-    while(true){
-        numWeeks++;
-        milestones[pos[i]]--;
-        if(milestones[pos[i]]==0){
-            numZeros++;
-            if(numZeros==milestones.size()){
-                break;
-            }
-            pos[1]++;
-            i=0;
-        }
-        else{
-            i++;
-            if(i==pos.size()){
-                i=0;
-            }
-            if((numZeros==milestones.size()-1 && milestones[0]>1 || numZeros==milestones.size())){
-                break;
-            }
-        }
+    long long int maxEle = *max_element(milestones.begin(), milestones.end()); // largest number in array
+    long long int sum = 0; // sum of all elements in array
+    for(int i=0;i<milestones.size();i++){
+        sum+=milestones[i];
     }
-   return numWeeks;
+    if(maxEle <= sum-maxEle){ // if the sum of other numbers is greater than the max element, then all milestones can be completed. So just return sum of array.
+        return sum;
+    }
+    return 2*(sum-maxEle)+1; // if max element is greater than sum, then we can't complete all milestones. Return 2*(sum-maxEle) for number of iterations until everything becomes 0 except maxEle. +1 because of one last milestone completed of maxEle
 }
 
 int main(){
-    vector<int> milestones = {5,2,1};
+    vector<int> milestones = {6,5,4,2};
     cout<<numberOfWeeks(milestones);
 }
