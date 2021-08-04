@@ -6,21 +6,25 @@ using namespace std;
 int maxSubarraySum(vector<int> arr){
     //Complete this function, your function should return the maximum subarray sum
     int n = arr.size();
-    
-    int sum=INT_MIN;
-    int sumSub =0;
+    if(n==0){
+        return 0;
+    }
+    if(n==1){
+        return arr[0];
+    }
+    int max=arr[0];
+    int sum =0;
     for(int i=0;i<n;i++){
-        sumSub+=arr[i];
-        if(sum<sumSub){
-            sum=sumSub;
+        sum+=arr[i];
+        if(sum>max){
+            max=sum;
         }
-        if(sumSub<0){
-            sumSub=0;
+        if(sum<0){
+            sum=0;
         }
     }
-    if(sum<0)
-        return 0;
-    return sum;
+   
+    return max;
 }
 
 int main(){
