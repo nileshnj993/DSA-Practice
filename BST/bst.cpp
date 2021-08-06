@@ -19,6 +19,14 @@ class node{
         }
 };
 
+class container{
+    public:
+        node *head;
+        node *tail;
+        
+};
+
+
 node *insert(node *root, int x){
     if(root==NULL){ // base case
         return new node(x);
@@ -37,10 +45,80 @@ node *sortedArraytoBST(vector<int> arr, int start, int end){ // we can't do norm
         return NULL;
     }
     int mid = (start+end)/2; // middle element is always root
-    node *temp = new node(arr[mid]);
-    temp->left = sortedArraytoBST(arr,start,mid-1); // start to mid -1 is left subtree
-    temp->right = sortedArraytoBST(arr,mid+1,end); // mid + 1 to end is right subtree
-    return temp;
+    node *root = new node(arr[mid]);
+    root->left = sortedArraytoBST(arr,start,mid-1); // start to mid -1 is left subtree
+    root->right = sortedArraytoBST(arr,mid+1,end); // mid + 1 to end is right subtree
+    return root;
+}
+
+int findClosest(node *root, int target){ // find number closest to target
+    node *temp = root;
+    int minDiff = INT_MAX;
+    int closest;
+    while(temp!=NULL){
+        int currentDiff = abs(temp->data - target);
+        if(currentDiff==0){
+            return temp->data;
+        }
+        if(currentDiff<minDiff){
+            minDiff = currentDiff;
+            closest = temp->data;
+        }
+        if(temp->data < target){
+            temp = temp->right;
+        }
+        else{
+            temp = temp->left;
+        }
+    }
+    return closest;
+}
+
+// convert tree to linked list - don't make new linked list. Make the right pointers of tree into next of linked list
+container convertToLinkedList(node *root){
+     container c1,c2;
+
+     if(root==NULL){
+        c1.head=NULL;
+        c1.tail=NULL;
+        return c1;      
+     }
+
+     if(root->left==NULL and root->right==NULL){
+         c1.head = root;
+         c1.tail = root;
+         return c1;
+     }
+
+     if(root->left!=NULL and root->right==NULL){
+         c1 = convertToLinkedList(root->left);
+         c1.tail->right = root;
+         c1.tail = root;
+     }
+     
+     else if(root->left==NULL and root->right!=NULL){
+         c1 = convertToLinkedList(root->right);
+         root->right = c1.head;
+         c1.head = root;
+     }
+
+     else{
+        c1 = convertToLinkedList(root->left);
+        c2 = convertToLinkedList(root->right);
+        c1.tail->right = root;
+        root->right = c2.head;
+        c1.tail=c2.tail; 
+     }
+
+     return c1;
+ }
+
+void dispLinkedList(container c){
+    node *root = c.head;
+    while(root!=NULL){
+        cout<<root->data<<" ";
+        root = root->right;
+    }
 }
 
 void inorder(node *root){
@@ -86,7 +164,7 @@ void preorder(node *root){
 
 int main(){
     node *root = NULL;
-    int a[] = {8,3,10,1,6,14,4,7,13};
+    int a[] = {1,2,3,4,5,6,7};
     int n = 0;
     for(int x : a){
         root = insert(root,x); // form a bst
@@ -95,8 +173,12 @@ int main(){
     inorder(root);
     cout<<"\n";
     cout<<search(root,5)<<"\n";
-    vector<int> v = {1,2,3,4,5,6,7,8,9,10};
+    vector<int> v = {1,2,3};
     root = sortedArraytoBST(v, 0, v.size()-1);
     preorder(root);
     cout<<"\n";
+    cout<<findClosest(root,11)<<"\n";
+    container c = convertToLinkedList(root);
+    dispLinkedList(c);
+
 }
