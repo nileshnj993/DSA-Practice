@@ -74,9 +74,42 @@ int findClosest(node *root, int target){ // find number closest to target
     return closest;
 }
 
+container convertToLinkedListPreOrder(node *root){
+        container c1,c2;
+        if(root==NULL){
+            c1.head=NULL;
+            c2.head=NULL;
+            return c1;
+        }
+        if(root->left==NULL and root->right==NULL){
+            c1.head = root;
+            c1.tail = root;
+            return c1;
+        }
+        if(root->left!=NULL and root->right==NULL){
+            c1 = convertToLinkedListPreOrder(root->left);
+            root->right = c1.head;
+            c1.head = root;
+        }
+        else if(root->left==NULL and root->right!=NULL){
+            c1 = convertToLinkedListPreOrder(root->right);
+            root->right = c1.head;
+            c1.head = root;
+        }
+        else{
+            c1 = convertToLinkedListPreOrder(root->left);
+            c2 = convertToLinkedListPreOrder(root->right);
+            root->right = c1.head;
+            c1.tail->right = c2.head;
+            c1.head = root;
+            c1.tail = c2.tail;
+        }
+        return c1;
+}
+
 // convert tree to linked list - don't make new linked list. Make the right pointers of tree into next of linked list
 container convertToLinkedList(node *root){
-     container c1,c2;
+     container c1,c2; // class to store head and tail
 
      if(root==NULL){
         c1.head=NULL;
@@ -84,25 +117,25 @@ container convertToLinkedList(node *root){
         return c1;      
      }
 
-     if(root->left==NULL and root->right==NULL){
+     if(root->left==NULL and root->right==NULL){ // leaf node then the node itself is the head and tail
          c1.head = root;
          c1.tail = root;
          return c1;
      }
 
-     if(root->left!=NULL and root->right==NULL){
+     if(root->left!=NULL and root->right==NULL){ // left->root
          c1 = convertToLinkedList(root->left);
          c1.tail->right = root;
          c1.tail = root;
      }
      
-     else if(root->left==NULL and root->right!=NULL){
+     else if(root->left==NULL and root->right!=NULL){ // root->right
          c1 = convertToLinkedList(root->right);
          root->right = c1.head;
          c1.head = root;
      }
 
-     else{
+     else{ // left->root->right
         c1 = convertToLinkedList(root->left);
         c2 = convertToLinkedList(root->right);
         c1.tail->right = root;
@@ -128,6 +161,35 @@ void inorder(node *root){
     inorder(root->left);
     cout<<root->data<<" ";
     inorder(root->right);
+}
+
+// o(n) method is to traverse through entire tree in inorder fashion and store it in an array, and then access.
+node *inorderSuccessor(node *root, node *target){
+    // if right subtree exists
+    if(target->right!=NULL){
+        node *temp = target->right;
+        while(temp->left!=NULL){
+            temp = temp->left;
+        }
+        return temp;
+    }
+
+    // if no right subtree
+    node *temp = root;
+    node *succ = NULL;
+    while(temp!=NULL){
+        if(temp->data > target->data){
+            succ = temp;
+            temp = temp->left;
+        }
+        else if(temp->data < target->data){
+            temp = temp->right;
+        }
+        else{
+            break;
+        }
+    }
+    return succ;
 }
 
 bool search(node *root, int key){
@@ -180,5 +242,4 @@ int main(){
     cout<<findClosest(root,11)<<"\n";
     container c = convertToLinkedList(root);
     dispLinkedList(c);
-
 }
