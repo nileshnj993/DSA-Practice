@@ -50,3 +50,59 @@ int main(){
         cout<<"\n";
     }
 }
+
+// class Solution { // triplets with no duplicates
+// public:
+//     vector<vector<int>> threeSum(vector<int>& nums) {
+//         int n = nums.size();
+//         sort(nums.begin(),nums.end());
+//         vector<vector<int>> result;
+//         if(n<3){
+//             return result;
+//         }
+//         int sum = 0;
+//         if(n==3){
+//             for(int i=0;i<3;i++){
+//                 sum+=nums[i];
+//             }
+//             if(sum==0){
+//                 result.push_back(nums);
+//                 return result;
+//             }
+//         }
+//         for(int i=0; i<n-3; i++){
+//             if(i > 0 && nums[i] == nums[i-1])    
+//             {
+//                 continue;
+//             }
+//             int j = i+1;
+//             int k = nums.size()-1;
+//             while(j<k){
+//                 int intermediateSum = nums[i]+nums[j]+nums[k];
+//                 if(intermediateSum<0){
+//                     j++;
+//                 }
+//                 else if(intermediateSum>0){
+//                     k--;
+//                 }
+//                 else{
+//                    result.push_back({nums[i],nums[j],nums[k]});
+                    
+//                     while(j < k && nums[j] == nums[j+1])
+//                     {
+//                         j++;
+//                     }
+//                     while(j < k && nums[k] == nums[k-1])
+//                     {
+//                         k--;
+//                     }
+                    
+//                     j++;
+//                     k--;
+                   
+//                 }
+//             }
+//         }
+//         return result;
+//     }
+// };
