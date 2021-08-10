@@ -23,8 +23,28 @@ double root(int n){ // answer will lie between 1 and m
    return mid;
 }
 
+double rootPrecision(double n, double p){
+    double limit = pow(10,-p-1);
+    double start = 1;
+    double end = n;
+    while((end-start) > limit){
+        double mid = (start+end)/2;
+        if(mid*mid==n){
+            return mid;
+        }
+        if((mid*mid) > n){
+            end = mid;
+        }
+        else{
+            start = mid;
+        }
+    }
+    return start;
+}
+
 int main(){
-    int n;
+    double n;
     cin>>n;
     cout<<root(n)<<"\n";
+    cout<<rootPrecision(n,3);
 }
