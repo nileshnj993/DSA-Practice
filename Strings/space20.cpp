@@ -1,4 +1,4 @@
-// replace all spaces with %20
+    // replace all spaces with %20
 #include <bits/stdc++.h>
 using namespace std;
 
