@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 void merge(vector<int> &arr, int start, int end){
     int i = start;
     int mid = (start+end)/2;
