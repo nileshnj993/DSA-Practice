@@ -2,7 +2,23 @@
 
 using namespace std;
 
-vector<vector<int>> formPair(vector<int> v, int sum){
+
+// find count of all possible pairs that add up to some sum (duplicates allowed)
+
+int countPairs(vector<int>v, int sum){
+    int count = 0;
+    unordered_map<int,int> m;
+    for(int i=0;i<v.size();i++){
+        if(m.find(sum-v[i])!=m.end()){
+            count+=m[sum-v[i]];
+        }
+        m[v[i]]++;
+    }
+    return count;
+}
+
+
+vector<vector<int>> formPair(vector<int> v, int sum){ // only works if finding unique pairs
     vector <int> pairNum;
     vector<vector<int>> returnVector;
     for(int i=0;i<v.size();i++){
@@ -38,4 +54,7 @@ int main(){
             cout<<"\n";
         }   
     }
+    vector<int> test = {1,1,1,1};
+    sum=2;
+    cout<<"\n"<<countPairs(test,sum)<<"\n";
 }
