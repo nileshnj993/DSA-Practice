@@ -39,6 +39,6 @@ string longestPalin(string s) {
 }
 
 int main(){
-    string s = "aabba";
+    string s = "aaaa";
     cout<<longestPalin(s)<<"\n";
 }
