@@ -19,7 +19,7 @@ int palindromeOperations(vector<int>arr){
         }
         else{
             i++;
-            arr[i+1]+=arr[i]; // merge i and i+1
+            arr[i]+=arr[i-1]; // merge i and i+1
             count++;
         }
     }
@@ -27,6 +27,6 @@ int palindromeOperations(vector<int>arr){
 }
 
 int main(){
-    vector<int> arr = {11, 14, 13, 11};
+    vector<int> arr = {12, 14, 13, 11};
     cout<<palindromeOperations(arr)<<"\n";
 }

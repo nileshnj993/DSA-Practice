@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-double root(int n){ // answer will lie between 1 and m 
+double root(int n){ // answer will lie between 1 and n
    long mid;
    long start = 1;
    long end = n;

@@ -85,5 +85,6 @@ int main(){
     displayPreOrder(root);
     cout<<"\n";
     cout<<diameter(root)<<"\n";
-    cout<<optDiameter(root).diameter<<"\n";
+    cout<<optDiameter(root).diameter+1<<"\n";
 }
+
