@@ -74,11 +74,46 @@ int findClosest(node *root, int target){ // find number closest to target
     return closest;
 }
 
+container convertToLinkedListInOrder(node *root){
+    container c1,c2;
+    if(root==NULL){
+        c1.head=NULL;
+        c1.tail=NULL;
+        return c1;
+    }
+    if(root->left==NULL and root->right==NULL){
+        c1.head = root;
+        c1.tail = root;
+        return c1;
+    }
+    if(root->left != NULL and root->right==NULL){
+        c1 = convertToLinkedListInOrder(root->left);
+        c1.tail->right = root;
+        c1.tail = root;
+        return c1;
+    }
+    if(root->left == NULL and root->right!=NULL){
+        c1 = convertToLinkedListInOrder(root->right);
+        c1.tail->right = root;
+        c1.tail = root;
+        return c1;
+    }
+    if(root->left!=NULL and root->right!=NULL){
+        c1 = convertToLinkedListInOrder(root->left);
+        c2 = convertToLinkedListInOrder(root->right);
+        c1.tail->right = c2.head;
+        c2.tail->right = root;
+        c1.tail = root;
+        return c1;
+    }
+    return c1;
+}
+
 container convertToLinkedListPreOrder(node *root){
         container c1,c2;
         if(root==NULL){
             c1.head=NULL;
-            c2.head=NULL;
+            c1.tail=NULL;
             return c1;
         }
         if(root->left==NULL and root->right==NULL){
@@ -232,14 +267,14 @@ int main(){
         root = insert(root,x); // form a bst
         n++;
     }
-    inorder(root);
-    cout<<"\n";
-    cout<<search(root,5)<<"\n";
-    vector<int> v = {1,2,3};
-    root = sortedArraytoBST(v, 0, v.size()-1);
-    preorder(root);
-    cout<<"\n";
-    cout<<findClosest(root,11)<<"\n";
-    container c = convertToLinkedList(root);
+    // inorder(root);
+    // cout<<"\n";
+    // cout<<search(root,5)<<"\n";
+    // vector<int> v = {1,2,3};
+    // root = sortedArraytoBST(v, 0, v.size()-1);
+    // preorder(root);
+    // cout<<"\n";
+    // cout<<findClosest(root,11)<<"\n";
+    container c = convertToLinkedListInOrder(root);
     dispLinkedList(c);
 }
