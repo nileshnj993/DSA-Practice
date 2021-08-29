@@ -26,7 +26,7 @@ void backtrack(string s,int i){
 
 int main(){
     int i = 0;
-    string s = "11??1";
+    string s = "?1?1";
     string temp="";
     int n = s.size();
     backtrack(s,i);
